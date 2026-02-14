@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>For Bianca ❤️</title>
+<title>Private For Bianca ❤️</title>
 
 <style>
 body {
@@ -15,11 +15,31 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     color: white;
-    overflow: hidden;
 }
 
-.container {
-    position: relative;
+.box {
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+input {
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 10px;
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    background: #ff4d6d;
+    color: white;
 }
 
 .photo {
@@ -28,105 +48,43 @@ body {
     margin: 20px 0;
     box-shadow: 0 0 30px rgba(255,255,255,0.8);
 }
-
-button {
-    padding: 12px 28px;
-    font-size: 18px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    margin: 10px;
-    transition: 0.3s;
-}
-
-.yes {
-    background: #ff4d6d;
-    color: white;
-}
-
-.yes:hover {
-    transform: scale(1.1);
-}
-
-.no {
-    background: white;
-    color: #ff4d6d;
-    position: absolute;
-}
-
-.heart {
-    position: absolute;
-    font-size: 20px;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    0% { transform: translateY(-10vh); opacity: 1; }
-    100% { transform: translateY(100vh); opacity: 0; }
-}
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>Bianca ❤️</h1>
-
-    <img src="bianca.jpg" class="photo">
-
-    <p>Will you be my Valentine?</p>
-
-    <button class="yes" onclick="yesClicked()">YES 💖</button>
-    <button class="no" id="noBtn">NO 😜</button>
-
-    <br><br>
-
-    <!-- Tombol Play Manual (Pasti Bisa Bunyi) -->
-    <audio id="bgm" controls>
-        <source src="love.mp3" type="audio/mpeg">
-    </audio>
+<div class="box" id="loginBox">
+    <h2>This page is only for Bianca ❤️</h2>
+    <p>Enter the secret password</p>
+    <input type="password" id="password" placeholder="Password">
+    <br>
+    <button onclick="checkPassword()">Enter</button>
+    <p id="error" style="color: yellow;"></p>
 </div>
 
+<audio id="bgm" loop>
+    <source src="love.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-const noBtn = document.getElementById("noBtn");
-const music = document.getElementById("bgm");
+function checkPassword() {
+    const correctPassword = "12102008"; // GANTI PASSWORD DI SINI
+    const input = document.getElementById("password").value;
 
-// NO kabur
-function moveButton() {
-    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    if (input === correctPassword) {
+        document.body.innerHTML = `
+            <div style="text-align:center;">
+                <h1>Bianca ❤️</h1>
+                <img src="bianca.jpg" class="photo">
+                <p>Will you be my Valentine?</p>
+                <h2>I Love You 💖</h2>
+            </div>
+        `;
+        document.getElementById("bgm").play();
+    } else {
+        document.getElementById("error").innerText = "Wrong password 💔";
+    }
 }
-
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("touchstart", moveButton);
-
-// YES ditekan
-function yesClicked() {
-    music.play(); // otomatis play saat YES
-    document.body.innerHTML = `
-        <h1 style="font-size:50px;">I Love You Bianca ❤️</h1>
-        <p style="font-size:22px;">You make me the happiest person alive 💕</p>
-    `;
-    document.body.style.background = "linear-gradient(135deg, #ff4d6d, #ffb3c6)";
-}
-
-// Animasi hati jatuh
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = Math.random() * 3 + 2 + "s";
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 5000);
-}
-
-setInterval(createHeart, 400);
 </script>
 
 </body>
