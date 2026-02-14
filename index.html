@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Private For Bianca ❤️</title>
+<title>For Bianca ❤️</title>
 
 <style>
 body {
@@ -11,38 +11,49 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: white;
+    background: radial-gradient(circle at top, #ff9a9e, #ff4d6d);
+    font-family: 'Poppins', sans-serif;
     overflow: hidden;
+    color: white;
+    text-align: center;
 }
 
-.box {
-    background: rgba(255,255,255,0.1);
+/* LOGIN BOX */
+.loginBox {
+    background: rgba(255,255,255,0.15);
     padding: 30px;
     border-radius: 20px;
+    backdrop-filter: blur(10px);
 }
 
-.photo {
-    width: 250px;
+input {
+    padding: 10px;
     border-radius: 20px;
-    margin: 20px 0;
-    box-shadow: 0 0 30px rgba(255,255,255,0.8);
+    border: none;
+    margin-top: 10px;
+    text-align: center;
 }
 
 button {
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 14px 32px;
+    font-size: 18px;
     border: none;
-    margin: 10px;
+    border-radius: 40px;
     cursor: pointer;
-    font-size: 16px;
+    transition: 0.3s;
+    margin: 10px;
 }
 
 .yes {
-    background: #ff4d6d;
-    color: white;
+    background: white;
+    color: #ff4d6d;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(255,255,255,0.7);
+}
+
+.yes:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 30px rgba(255,255,255,1);
 }
 
 .no {
@@ -50,12 +61,30 @@ button {
     color: #ff4d6d;
     position: absolute;
 }
+
+.photo {
+    width: 220px;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.8);
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
 </style>
 </head>
 
 <body>
 
-<div class="box" id="loginBox">
+<div class="loginBox" id="loginBox">
     <h2>This page is only for Bianca ❤️</h2>
     <p>Enter the secret password</p>
     <input type="password" id="password" placeholder="Password">
@@ -70,19 +99,21 @@ button {
 
 <script>
 function checkPassword() {
-    const correctPassword = "12102008"; // GANTI PASSWORD DI SINI
+    const correctPassword = "bianca123"; // GANTI PASSWORD
     const input = document.getElementById("password").value;
 
     if (input === correctPassword) {
+
         document.body.innerHTML = `
             <h1>Bianca ❤️</h1>
             <img src="bianca.jpg" class="photo">
             <p>Will you be my Valentine?</p>
             <button class="yes" onclick="yesClicked()">YES 💖</button>
             <button class="no" id="noBtn">NO 😜</button>
+            <audio autoplay loop>
+                <source src="love.mp3" type="audio/mpeg">
+            </audio>
         `;
-
-        document.getElementById("bgm").play();
 
         const noBtn = document.getElementById("noBtn");
 
@@ -94,6 +125,8 @@ function checkPassword() {
         }
 
         noBtn.addEventListener("mouseover", moveButton);
+
+        setInterval(createHeart, 300);
     } else {
         document.getElementById("error").innerText = "Wrong password 💔";
     }
@@ -105,8 +138,20 @@ function yesClicked() {
         <p>You make me the happiest person alive 💕</p>
     `;
 }
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}
 </script>
 
 </body>
 </html>
-
