@@ -15,31 +15,13 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     color: white;
+    overflow: hidden;
 }
 
 .box {
     background: rgba(255,255,255,0.1);
     padding: 30px;
     border-radius: 20px;
-    backdrop-filter: blur(10px);
-}
-
-input {
-    padding: 10px;
-    border-radius: 20px;
-    border: none;
-    margin-top: 10px;
-    text-align: center;
-}
-
-button {
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
-    margin-top: 10px;
-    cursor: pointer;
-    background: #ff4d6d;
-    color: white;
 }
 
 .photo {
@@ -47,6 +29,26 @@ button {
     border-radius: 20px;
     margin: 20px 0;
     box-shadow: 0 0 30px rgba(255,255,255,0.8);
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.yes {
+    background: #ff4d6d;
+    color: white;
+}
+
+.no {
+    background: white;
+    color: #ff4d6d;
+    position: absolute;
 }
 </style>
 </head>
@@ -68,22 +70,40 @@ button {
 
 <script>
 function checkPassword() {
-    const correctPassword = "12102008"; // GANTI PASSWORD DI SINI
+    const correctPassword = "bianca123"; // GANTI PASSWORD DI SINI
     const input = document.getElementById("password").value;
 
     if (input === correctPassword) {
         document.body.innerHTML = `
-            <div style="text-align:center;">
-                <h1>Bianca ❤️</h1>
-                <img src="bianca.jpg" class="photo">
-                <p>Will you be my Valentine?</p>
-                <h2>I Love You 💖</h2>
-            </div>
+            <h1>Bianca ❤️</h1>
+            <img src="bianca.jpg" class="photo">
+            <p>Will you be my Valentine?</p>
+            <button class="yes" onclick="yesClicked()">YES 💖</button>
+            <button class="no" id="noBtn">NO 😜</button>
         `;
+
         document.getElementById("bgm").play();
+
+        const noBtn = document.getElementById("noBtn");
+
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        }
+
+        noBtn.addEventListener("mouseover", moveButton);
     } else {
         document.getElementById("error").innerText = "Wrong password 💔";
     }
+}
+
+function yesClicked() {
+    document.body.innerHTML = `
+        <h1 style="font-size:50px;">I Love You Bianca ❤️</h1>
+        <p>You make me the happiest person alive 💕</p>
+    `;
 }
 </script>
 
